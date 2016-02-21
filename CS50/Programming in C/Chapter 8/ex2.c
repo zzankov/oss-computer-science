@@ -21,19 +21,21 @@ int g ( int month )
 
 // function N which takes a year and returns an integer based on an equation
 // this formula will be used to calculate the difference between 2 dates
-int N (struct date d)
+long int N (struct date d)
 {
-    int result;
+    long int result, check0, check1, check2;
     result = (1461 * f(d.year, d.month) / 4 + 153 * g(d.month) / 5 + d.day);
-    
-    if ( d.year >= 1900 && d.month >= 3 && d.day >= 1 )
-        result += 0;
-    else if ( d.year >= 1800 && d.month >= 3 && d.day >= 1 )
-        result += 1;
-    else if ( d.year >= 1700 && d.month >= 3 && d.day >= 1 )
-        result += 2;
-    else
+    check0 = (1461 * f(1700, 3) / 4 + 153 * g(3) / 5 + 1);
+    check1 = (1461 * f(1800, 3) / 4 + 153 * g(3) / 5 + 1);
+    check2 = (1461 * f(1900, 3) / 4 + 153 * g(3) / 5 + 1);
+
+    if (result < check0)
         result = 0;
+    else if (result < check1)
+        result += 2;
+    else if (result < check2)
+        result += 1;
+
     return result;
 }
 
