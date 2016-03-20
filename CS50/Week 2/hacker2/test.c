@@ -31,20 +31,20 @@ void inc (char *p)
         p[i] = 32;
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
     char *crypt(const char *key, const char *salt);
     
     char d[] = {' ', 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    for ( int i = 0; i < (95 + 95 + 95); i++ )
-    {
-        printf ("%s\n", d);
-        inc(d);
-    }
+    //for ( int i = 0; i < (95 + 95 + 95); i++ )
+    //{
+        //printf ("%s\n", d);
+        //inc(d);
+    //}
 
-    char pwd[] = "Zz395275488", salt[] = "A1";
-    printf ("%s\n", crypt(pwd, salt));
+    char salt[] = "50";
+    printf ("%s\n", crypt(argv[1], salt));
 
     return 0;
 }
