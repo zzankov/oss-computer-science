@@ -1,0 +1,1 @@
+# define QUARTS_PER_LITER 1.057
