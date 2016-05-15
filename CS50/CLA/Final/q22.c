@@ -1,0 +1,12 @@
+    #include <stdio.h> 
+    int main(void) { 
+        int i = 1, j = i + 2 * i;
+        switch(j - i) {
+                case  1: j++;
+                case  2: j--;
+                case  0: j++; break;
+                default: j = 0;
+        }
+        printf("%d\n", ++j); 
+        return 0; 
+    }
