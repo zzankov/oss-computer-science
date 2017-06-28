@@ -2,10 +2,9 @@
 
 int main(void)
 {
-    int value1 = 15;
-    int value2 = 87;
-    
-    printf("Subtracting %i from %i gives %i.\n", value1, value2, value2 - value1);
-    
+    int a = 87, b = 15, c = a - b;
+
+    printf ("%i - %i = %i\n", a, b, c);
+
     return 0;
 }

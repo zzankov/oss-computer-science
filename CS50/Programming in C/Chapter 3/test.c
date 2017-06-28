@@ -2,7 +2,10 @@
 
 int main(void)
 {
-    long int a = 131071100L;
     
-    printf("a = %lo\n", a);
+    printf ("%lu\n", sizeof (float));
+
+    printf ("%lu\n", sizeof (double));
+    printf ("%lu\n", sizeof (_Bool));
+    return 0;
 }
