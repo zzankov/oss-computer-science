@@ -1,20 +1,19 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    float sum = 0, nums[10] = {0};
-    int i;
-
-    printf ("Please give me 10 numbers:\n");
-
-    for ( i = 0; i < 10; ++i )
-        scanf ("%f", &nums[i]);
+    float myFloats[10], sum = 0;
     
-    for ( i = 0; i < 10; ++i )
-        sum += nums[i];
 
-    printf ("%f\n", sum / i);
+    for (int i = 0; i < 10; i++) {
+        printf ("Give me a float: ");
+        scanf ("%f", &myFloats[i]);
+    }
+
+    for (int i = 0; i < 10; i++)
+        sum += myFloats[i];
     
+    printf ("The average of your floats is %f\n", sum / 10);
+
     return 0;
-
 }

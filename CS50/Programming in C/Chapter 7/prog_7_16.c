@@ -1,20 +1,18 @@
-// Program to illustrate static and automatic variables
-# include <stdio.h>
+#include <stdio.h>
 
-void auto_static (void)
-{
-    int         autoVar = 1;
-    static int  staticVar = 1;
-    printf ("automatic = %i, static = %i\n", autoVar, staticVar);
-    autoVar++;
-    staticVar++;
+void auto_static (void) {
+    int autoVar = 1;
+    static int staticVar = 1;
+
+    printf ("automatic = %i, static = %i\n", autoVar++, staticVar++);
+
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int   i;
-    void  auto_static (void);
-    for ( i = 0; i < 5; ++i )
+    void auto_static(void);
+
+    for (int i = 0; i < 5; i++)
         auto_static();
     return 0;
 }

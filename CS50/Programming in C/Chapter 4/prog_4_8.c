@@ -2,20 +2,20 @@
 
 # include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
     int number, right_digit;
-    
-    printf ("Enter your digit.\n");
-    scanf  ("%i", &number);
-    
-    while ( number != 0 ) {
-        right_digit = number % 10;
-        printf ("%i", right_digit);
+
+    printf ("Enter your number: ");
+
+    scanf ("%i", &number);
+
+    while (number != 0 ) {
+        printf("%i", number % 10);
         number /= 10;
     }
-    
-    printf ("\n");
-    
+
+    printf("\n");
+
     return 0;
 }

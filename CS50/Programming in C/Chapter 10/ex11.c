@@ -1,74 +1,37 @@
-// Program to determine tomorrow's date
-# include <stdio.h>
-# include <stdbool.h>
-struct date
+#include <stdio.h>
+
+struct date 
 {
-    int   month;
-    int   day;
-    int   year;
+    int month;
+    int day;
+    int year;
 };
 
-// Function to calculate tomorrow's date
-void dateUpdate(struct date  *today)
+_Bool isLeap(int year)
 {
-    // prototype function
-    int   numberOfDays(struct date  d);
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
 
-    // run checks on today's date and update accordingly
-    if ( today->day != numberOfDays(*today) ) {
-        today->day++;
+void dateUpdate (struct date *d)
+{
+    int days[12] = 
+        {31, 28 + isLeap(d->year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (++d->day % days[d->month-1] == 1)
+    {
+        d->day = d->day % days[d->month-1];
+        if (++d->month % 12 == 1)
+        {
+            d->month = d->month % 12;
+            d->year++;
+        }
     }
-    else if ( today->month == 12 ) {       // end of year
-        today->day = 1;
-        today->month = 1;
-        today->year++;
-    }
-    else {
-        today->day = 1;
-        today->month++;
-    }
 }
 
-// Function to calculate the number of days in a month
-int numberOfDays(struct date  d)
+int main (int argc, char *argv[])
 {
-    int   days;
+    struct date d = {2, 28, 2016};
 
-    // prototype function
-    bool  isLeapYear (struct date d);
-    const int daysPerMonth[12] = 
-    { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    
-    // run checks and apply leap year logic
-    if ( isLeapYear (d) && d.month == 2 )
-        days = 29;
-    else
-        days = daysPerMonth[d.month - 1];
-    return days;
-}
-
-// Function to determine whether a year is leap or not
-bool isLeapYear(struct date d)
-{
-    bool leapYearFlag;
-    if ( (d.year % 4 == 0 && d.year % 100 != 0) || d.year % 400 == 0 )
-        leapYearFlag = true;    // the year is leap
-    else
-        leapYearFlag = false;   // not a leap year
-    return leapYearFlag;
-}
-
-int main(void)
-{
-    // prototype functions
-    void dateUpdate (struct date  *today);
-    
-    // variables
-    struct date thisDay;
-    printf ("Enter today's date (mm dd yyyy): ");
-    scanf  ("%i%i%i", &thisDay.month, &thisDay.day, &thisDay.year);
-    dateUpdate(&thisDay);
-    printf ("Tomorrow's date is %.2i/%.2i/%.2i.\n", thisDay.month, thisDay.day,
-            thisDay.year % 100);
-    return 0;
-}
+    printf ("Date before update: %2i/%2i/%4i\n", d.month, d.day, d.year);
+    dateUpdate(&d);
+    printf ("Date after update: %2i/%2i/%4i\n", d.month, d.day, d.year);
+} 

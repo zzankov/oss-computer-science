@@ -1,23 +1,16 @@
 /*  A minus before the field width specification in a printf() statement causes
     text to be displayed left-justified.                                      */
     
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int n, triangularNumber;
-    
     printf("TABLE OF TRIANGULAR NUMBERS\n\n");
-    printf(" n     Sum from 1 to n\n");
-    printf("---    ---------------\n");
-    
-    triangularNumber = 0;
-    
-    for (n = 1; n <= 10; ++n) { 
-        triangularNumber += n;
-        
-        printf("%-2i            %i\n", n, triangularNumber);
-    }
-    
+    printf(" n\ttriangular\n");
+    printf("--\t----------\n");
+
+    for (int i = 5; i <= 50; i += 5)
+        printf("%2i\t%-10i\n", i, i * (i + 1) / 2 );
+
     return 0;
 }

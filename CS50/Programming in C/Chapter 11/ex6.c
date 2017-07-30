@@ -1,41 +1,47 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int bin_size (unsigned int n)
+int int_size()
 {
-    int result = 0;
+    int n = ~0;
+    int bits = 0;
 
-    while ( n )
+    while ( n < 0 )
+        n <<= 1, bits++;
+
+    return bits;
+}
+
+int bitpat_search(unsigned int source, int pattern, int n)
+{
+    int int_size();    
+    unsigned int ptn = pattern, test;
+    int counter = 0;
+    int intSize = int_size();
+    ptn = ptn & ((unsigned int)~0 >> (intSize - n));  // only take the rightmost n bits
+    
+    // push source to the left until the first active bit
+    while ((int)source > 0 && source != 0)
+        source <<= 1;
+
+    do 
     {
-        result++;
-        n /= 2;
-    }
-    return result;
-}
-int extract_n_bits (int pattern, int bits)
-{
-    int mask = 0;
-
-    for (int i = 0; i < bits; i++)
-        mask |= 1 << i;
-
-    return pattern & mask;
+        test = ((unsigned int)source >> (intSize - counter - n)) & (unsigned int)~0 >> intSize - n;
+        if ( test == ptn )
+            break;
+        counter++;
+    } while (counter < intSize - n);
+    
+    if (counter >= intSize - n)
+        counter = -1;
+    
+    return counter;
 }
 
-int bitpat_search (unsigned int source, int pattern, int n)
+int main (int argc, char *argv[])
 {
-    int size = bin_size(source);
-    int mask = extract_n_bits(pattern, n);
-    for ( int i = 0; i < size - n; i++ )
-        if (extract_n_bits(source  >> (size - n - i), n) == mask)
-            return i;
-    return -1;
-}
+    int bitpat_search(unsigned int source, int pattern, int n);
+    
+    printf ("%i\n", bitpat_search(0xe1f4, 0x5, 3));
 
-int main(void)
-{
-    int pattern = 0x5;
-    unsigned int source = 0xe1f4;
-    int bits = 3;
-    printf ("%i\n",bitpat_search(source, pattern, bits));
     return 0;
 }

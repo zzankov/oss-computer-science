@@ -1,35 +1,45 @@
-# include <stdio.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-int intlen(int number)
-{
-    int i = 1;
-    while (number != 0)
-    {
-        i++;
-        number /= 10;
-    }
-    return i - 1;
+int intLen(int n) {
+    int i;
+    for ( i = 0; n != 0; i++, n /= 10) 
+        ;
+
+    return i;
 }
-void intToStr(int source, char result[])
+
+char intToStr(int n, char result[])
+{
+    bool neg = n < 0;
+    int intLen(int n);
+    int intSize;
+    intSize = intLen(n) + neg;
+
+    if (neg)
+        n = -n;
+
+    result[intSize] = '\0';
+    // printf ("%i\n", intSize);
+    while (--intSize >= 0) {
+        result[intSize] = (n % 10) + '0';
+        n /= 10;
+    }
+
+    if (neg)
+        *result = '-';
+}
+
+int main (int argc, char *argv[])
 {
     int i;
-    i = intlen(source);
-    result[i] = '\0';
+    char num[100];
+    printf ("Give me an integer: ");
+    scanf ("%i", &i);
 
-    do
-    {
-        result[--i] = (source % 10) + '0';
-        source /= 10;
-    } while (source != 0);
-}
+    intToStr(i, num);
 
-int main (void)
-{
-    int src = 2054301;
-    char rslt[100];
-    printf("number = %i\n", src);
-    intToStr(src, rslt);
-    printf("string = %s\n", rslt);
+    printf ("%s\n", num);
 
     return 0;
 }

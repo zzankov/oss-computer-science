@@ -1,23 +1,17 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int n, number, triangularNumber, counter, counter_limit;
-    
-    printf ("How many triangular numbers do you want to calculate? ");
-    scanf  ("%i", &counter_limit);
-    
-    for (counter = 1; counter <= counter_limit; counter++) {
-        printf ("What triangular number do you want? ");
-        scanf  ("%i", &number);
-        
-        triangularNumber = 0; // calc reset at this point
-        
-        for (n =  1; n <= number; n++)
-            triangularNumber += n;
-            
-        printf ("Triangular number %i is %i\n", number, triangularNumber);
+    int times, number;
+    printf ("How many triangular numbers would you like to calculate? ");
+    scanf ("%i", &times);
+
+    for (int i = 0; i < times; ++i) {
+        printf("Give me a number: ");
+        scanf("%i", &number);
+        printf("Triangular of %i is %i\n", number, 
+            number * (number + 1) / 2);
     }
-    
+
     return 0;
 }

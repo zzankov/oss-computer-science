@@ -1,20 +1,20 @@
-# include <stdio.h>
+#include <stdio.h>
 
 double x;
 static double result;
 
-static void doSquare(void)
+static void doSquare (void)
 {
-    double square (void);
+	double square(void);
 
-    x = 2.0;
-    result = square();
+	x = 2.0;
+	result = square();
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    doSquare();
-    printf ("%f\n", result);
+	doSquare();
+	printf ("%g\n", result);
 
-    return 0;
+	return 0;
 }

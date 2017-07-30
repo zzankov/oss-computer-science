@@ -1,21 +1,21 @@
-# include <stdio.h>
+#include <stdio.h>
 
-void readLine (char *buffer)
+void readLine(char *buffer)
 {
-    do
-        *buffer = getchar(); 
+    do 
+        *buffer = getchar();
     while (*buffer++ != '\n');
     *--buffer = '\0';
 }
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    char text[81];
-    printf ("Type in your text.\n");
+    void readLine(char *buffer);
+    char buffer[81];
 
-    readLine(text);
-
-    printf ("You wrote: '%s'\n", text);
+    printf ("Enter your text:\n");
+    readLine(buffer);
+    printf ("You entered: '%s'\n", buffer);
 
     return 0;
 }

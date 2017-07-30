@@ -1,42 +1,37 @@
 // Function to determine if a character is alphabetic
-# include <stdio.h>
-# include <stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-bool alphabetic (const char c)
+bool isAlpha (const char c)
 {
-    if ( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') )
-        return true;
-    else
-        return false;
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
-/* Function to count the number of words in a string */
-int countWords (const char  string[])
-{
-    int   i, wordCount = 0;
-    bool  lookingForWord = true, alphabetic (const char c);
+// function to count the number of words in a string
+int countWords (const char str[]) {
+    int wordCount = 0;
+    bool looking = true, isAlpha(const char c);
 
-    for ( i = 0; string[i] != '\0'; i++ )
-        if ( alphabetic(string[i]) )
-        {
-            if ( lookingForWord )
-            {
-                ++wordCount;
-                lookingForWord = false;
+    for (int i = 0; str[i] != '\0'; i++)
+        if (isAlpha(str[i])) {
+            if (looking) {
+                wordCount++;
+                looking = false;
             }
-        }
-        else
-            lookingForWord = true;
+        } else
+            looking = true;
+
     return wordCount;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
     const char text1[] = "Well, here goes.";
     const char text2[] = "And here we go... again.";
-    int   countWords (const char string[]);
+    int countWords (const char str[]);
 
-    printf ("\'%s\' - words = %i\n", text1, countWords(text1));
-    printf ("\'%s\' - words = %i\n", text2, countWords(text2));
+    printf ("%s - words = %i\n", text1, countWords(text1));
+    printf ("%s - words = %i\n", text2, countWords(text2));
+
     return 0;
 }

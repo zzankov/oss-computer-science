@@ -1,18 +1,23 @@
-# include <stdio.h>
+// Function to count the characters in a string - Pointer version
+#include <stdio.h>
+
 int stringLength (const char *string)
 {
     const char *cptr = string;
-    while ( *cptr )
+
+    while (*cptr)
         ++cptr;
+
     return cptr - string;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
     int stringLength (const char *string);
-    printf ("%i\t", stringLength("stringLength test"));
-    printf ("%i\t", stringLength(""));
-    printf ("%i\t", stringLength("complete"));
-    printf ("\n");
+    
+    printf ("%i ", stringLength("stringLength test"));
+    printf ("%i ", stringLength(""));
+    printf ("%i\n", stringLength("complete"));
+
     return 0;
 }

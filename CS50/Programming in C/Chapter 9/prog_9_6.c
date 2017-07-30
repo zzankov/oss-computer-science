@@ -1,33 +1,27 @@
-# include <stdio.h>
-int main(void)
+#include <stdio.h>
+
+int main (int argc, char *argv[])
 {
-    int     i;
-    char    line[81];
+    char line[81];
+    void readLine (char buffer[]);
 
-    // prototype
-    void    readLine (char buffer[]);
-
-    for ( i = 0; i < 3; i++ )
-    {
-         readLine(line);
-         printf ("%s\n\n", line);
+    for ( int i = 0; i < 3; i++) {
+        readLine(line);
+        printf ("%s\n\n", line);
     }
+
     return 0;
 }
 
-// function to read a line
-void readLine (char buffer[])
-{
-    char    character;
-    int     i = 0;
+void readLine (char buffer[]) {
+    char c;
+    int i = 0;
 
-    do
-    {
-        character = getchar();
-        buffer[i] = character;
-        i++;
-    } 
-    while ( character != '\n');
+    do {
+        c = getchar();
+        buffer[i] = c;
+        ++i;
+    } while (c != '\n');
 
     buffer[i - 1] = '\0';
 }

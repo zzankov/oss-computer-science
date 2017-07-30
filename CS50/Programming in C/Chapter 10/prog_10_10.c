@@ -1,4 +1,4 @@
-# include <stdio.h>
+#include <stdio.h>
 
 struct entry
 {
@@ -6,40 +6,42 @@ struct entry
     struct entry *next;
 };
 
-struct entry *findEntry (struct entry   *listPtr, int match)
+struct entry *findEntry (struct entry *listPtr, int match)
 {
-    while ( listPtr != (struct entry *) 0 )
-        if ( listPtr-> value == match )
+    while (listPtr != NULL)
+        if (listPtr->value == match)
             return listPtr;
         else
             listPtr = listPtr->next;
-    return (struct entry *) 0;
+
+    return NULL;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    // declare functions and variables
     struct entry *findEntry (struct entry *listPtr, int match);
-    struct entry n1, n2, n3, *listPtr;
+    struct entry n1, n2, n3, *lPtr, *lPtrStart = &n1;
+    
     int search;
 
-    // initialize lists
     n1.value = 100;
     n1.next = &n2;
+
     n2.value = 200;
     n2.next = &n3;
+
     n3.value = 300;
-    n3.next = (struct entry *) 0;
+    n3.next = NULL;
 
-    // get user input for the search variable
-    printf ("Enter value to locate: ");
+    printf("Enter value to locate: ");
     scanf ("%i", &search);
-    listPtr = findEntry(&n1, search); // search for value
 
-    // print results
-    if ( listPtr != (struct entry *) 0 )
-        printf ("Found %i.\n", listPtr->value);
+    lPtr = findEntry(lPtrStart, search);
+
+    if (lPtr)
+        printf ("Found %i.\n", lPtr->value);
     else
         printf ("Not found.\n");
+
     return 0;
 }

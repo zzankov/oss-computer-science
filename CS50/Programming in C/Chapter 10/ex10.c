@@ -1,84 +1,26 @@
-// Dictionary lookup program
-# include <stdio.h>
-struct entry
+#include <stdio.h>
+
+int strComp(char *s1, char *s2)
 {
-    char    word[15];
-    char    description[50];
-};
-
-// Function to compare two character strings
-int compareStrings (const char *s1, const char *s2)
-{
-    int answer;
-    while ( *s1 == *s2 && *s1 && *s2 )
-    {
-        s1++;
-        s2++;
-    }
-
-    if ( *s1 < *s2 )
-        answer = -1;          /* s1 < s2 */
-    else if ( *s1 == *s2 )
-        answer = 0;           /* s1 == s2 */
-    else
-        answer = 1;           /* s1 > s2 */
-    return answer;
-}
-
-// Function to look up a word inside a dictionary
-int lookup (const struct entry dictionary[], const char search[],
-        const int entries)
-{
-    int   low = 0;
-    int   high = entries - 1;
-    int   mid, result;
-
-    // prototyping
-    int   compareStrings (const char s1[], const char s2[]);
-
-    while (low <= high) {
-        mid = (low + high) / 2;
-        result = compareStrings (dictionary[mid].word, search);
-        if ( result == -1 )
-            low = mid + 1;
-        else if (result == 1)
-            high = mid - 1;
-        else
-            return mid;   /* found the word */
-    }
-    return -1;            /* not found */
-}
-
-int main(void)
-{
-    const struct entry dictionary[100] =
-    {   { "aardvark",   "a burrowing African mammal"                  },
-        { "abyss",      "a bottomless pit"                            },
-        { "acumen",     "menatally sharp; keen"                       },
-        { "addle",      "to become confused"                          },
-        { "aerie",      "a high nest"                                 },
-        { "affix",      "to append; attach"                           },
-        { "agar",       "a jelly made from seaweed"                   },
-        { "ahoy",       "a nautical call of greeting"                 },
-        { "aigrette",   "an ornamental cluster of feathers"           },
-        { "ajar",       "partially opened"                            },
-    };
-
-    int entries = 10;
-    char word[15];
-    int entry;
+    while (*s1== *s2 && *s1 && *s2)
+        s1++, s2++;
     
-    // prototyping
-    int lookup (const struct entry dictionary[], const char search[], 
-            const int entries);
-
-    printf ("Enter word: ");
-    scanf  ("%s", word);
-    entry = lookup (dictionary, word, entries);
-    if ( entry != -1 )
-        printf ("%s\n", dictionary[entry].description);
+    if (*s1 < *s2)
+        return -1;
+    else if (*s1 > *s2)
+        return 1;
     else
-        printf ("Sorry, the word %s is not found in the dictionary.\n", word);
+        return 0;
+}
+
+int main (int argc, char *argv[])
+{
+    char str1[] = "This is a string.";
+    char str2[] = "This is another string";
+
+    printf ("'%s' and '%s' compared: %i\n", str1, str2, strComp(str1, str2));
+    printf ("'%s' and '%s' compared: %i\n", str1, str1, strComp(str1, str1));
+    printf ("'%s' and '%s' compared: %i\n", str2, "Another string", strComp(str2, "Another string"));
 
     return 0;
 }

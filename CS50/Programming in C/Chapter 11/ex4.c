@@ -1,51 +1,73 @@
-# include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// function to get the size of an integer in bits on the specific system
-int int_size(void)
+
+void bin_print(int n)
 {
-    return sizeof(int) * 8;
+    int sz = sizeof(n) * 8;
+
+    for (int i = sz - 1 ; i >= 0; i--)
+        printf ("%c", abs(n >> i & 1) + '0');
+
+    printf("\n");
 }
 
-// function to rotate the bits of an integer
-unsigned int rotate(unsigned int value, int n)
+int int_size(void)
 {
-    unsigned int result, bits;
-    int intsize;
-    intsize = int_size();
+    int n = ~0;
+    int bits = 0;
 
-    // scale down the shift count to an int size
-    if ( n > 0 )
-        n %= intsize;
+    while ( n < 0 )
+        n <<= 1, bits++;
+
+    return bits;
+}
+
+int rotate(int n, int times)
+{
+    int int_size(void);
+    int intSize = int_size();
+    int result, bits;
+
+    // trim times if too large
+    if (times > 0)
+        times %= intSize;
     else
-        n = -(-n % intsize);
+        times = -(-times % intSize);
+    
+    if (times == 0)
+        result = n;
+    else if (times > 0) {
+        bits = n >> (intSize - times);
+        result = n << times | bits;
+    } else {
+        times = -times;
+        bits = n << (intSize - times);
+        result = n >> times | bits;
+    }
 
-    if ( n == 0 )
-        result = value;
-    else if ( n > 0 )           // left rotate
-    {
-        bits = value >> (intsize - n);
-        result = value << n | bits;
-    }
-    else                            // right rotate
-    {
-        n = -n;
-        bits = value << (intsize - n);
-        result = value >> n | bits;
-    }
     return result;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    unsigned int w1 = 0xabcdef00u, w2 = 0xffff1122u; 
-    unsigned int rotate(unsigned int value, int n);
-    printf ("%x\n", rotate(w1, 8));
-    printf ("%x\n", rotate(w1, -16));
-    printf ("%x\n", rotate(w2, 4));
-    printf ("%x\n", rotate(w2, -2));
-    printf ("%x\n", rotate(w1, 0));
-    printf ("%x\n", rotate(w1, 44));
+    // check number of arguments
+    if (argc != 3)
+    {
+        printf ("Incorrect number of arguments! Two integer values expected\n");
+        return EXIT_FAILURE;
+    }
 
+    // declare functions and variables
+    void bin_print(int n);
+    int rotate(int n, int times);
+    int num = atoi(argv[1]);
+    int rot = atoi(argv[2]);
+
+    printf ("Your original number in binary format: ");
+    bin_print(num);
+    printf ("Your number rotated by %i: ", rot);
+    bin_print(rotate(num, rot));
+    
     return 0;
-
 }

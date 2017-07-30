@@ -1,50 +1,23 @@
-# include <stdio.h>
-# include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// function to get a mask for a specific bit (location given by the first
-// argument of the function, where 0 is the left-most bit) based on an item
-// size given in number of bits (arg_size)
-unsigned int get_mask (int bit, int arg_size)
+_Bool bit_test(unsigned int word, int n)
 {
-    unsigned int mask;
-
-    if (bit < 0)            // ID from right to left
-    {
-        bit = (-bit % arg_size);
-        mask = 1 << bit; 
-    }
-    else                    // ID from left to right
-    {
-        bit %= arg_size;
-        mask = 1 << (arg_size - bit - 1);
-    }
-    return mask;
+    return word & 1 << n;
 }
 
-// function to test whether a specific bit in a specific number is activated
-bool bit_test (unsigned int num, int bit)
+unsigned int bit_set(unsigned int word, int n)
 {
-    return num & get_mask(bit, sizeof(num) * 8);
+    return word | 1 << n;
 }
 
-// function to turn bit n on inside a number
-unsigned int bit_set (unsigned int num, int bit)
+int main (int argc, char *argv[])
 {
-    return num | get_mask(bit, sizeof(num) * 8);
-}
-
-int main(void)
-{
-    bool bit_test (unsigned int num, int bit);
-    unsigned int bit_set (unsigned int num, int bit);
-    int bit_num = 29;
-
-    for ( int i = 0; i < 10; i++ ) {
-        printf ("bit_num %i is %i in number %i\n", bit_num, 
-                bit_test(i, bit_num), i);
-        printf ("if the bit is toggled on the number is %u\n", 
-                bit_set(i, bit_num));
-    }
+    printf ("%i\n", bit_test(atoi(argv[1]), atoi(argv[2])));
+    printf ("%i\n", bit_set(atoi(argv[1]), atoi(argv[2])));
+    printf ("%i\n", bit_test(bit_set(atoi(argv[1]), 
+            atoi(argv[2])), 
+        atoi(argv[2])));
 
     return 0;
 }

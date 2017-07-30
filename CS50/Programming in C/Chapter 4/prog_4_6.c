@@ -1,8 +1,6 @@
-// Program to introduce the while statement
+#include <stdio.h>
 
-# include <stdio.h>
-
-int main(void)
+int main (int argc, char *argv[])
 {
     int count = 1;
     
@@ -10,6 +8,6 @@ int main(void)
         printf ("%i\n", count);
         count++;
     }
-    
+
     return 0;
 }

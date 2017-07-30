@@ -1,51 +1,43 @@
-# include <stdio.h>
-# include <stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
 
-float strToFloat (const char numeric_string[])
+int main (int argc, char *argv[])
 {
-    int i = 0, j = 0, intValue;
-    float result = 0;
-    bool negative = false, post_dec = false;
+    float strToFloat (char str[]);
+    char num[50];
+    printf ("Give me your integer: ");
+    scanf ("%s", num);
+    printf ("%f\n", strToFloat(num));
+    printf ("%f\n", strToFloat(num) + 25);
 
-    // check if the number is negative
-    if ( numeric_string[i] == '-' ) {
-        negative = true;
-        i = 1;
-    }
-
-    // convert string to number
-    while ( (numeric_string[i] >= '0' && numeric_string[i] <= '9') ||
-            numeric_string[i] == '.' ) 
-    {
-        if (post_dec)
-            j++;
-
-        if (numeric_string[i] != '.')
-        {
-            intValue = numeric_string[i] - '0';
-            result = result * 10 + intValue;
-        }
-        else if (numeric_string[i] == '.')
-            post_dec = true;
-        i++;
-    }
-
-    for ( i = 0; i < j; i++ )
-        result /= 10;
-
-    if ( negative )
-        result *= -1;
-    return result;
+    return 0;
 }
 
-int main(void)
+float strToFloat (char str[])
 {
-    int strToInt (const char numericString[]);
-    printf ("%f\n", strToFloat("245"));
-    printf ("%f\n", strToFloat("100") + 25);
-    printf ("%f\n", strToFloat("13x5"));
-    printf ("%f\n", strToFloat("-405"));
-    printf ("%.4f\n", strToFloat("-405.8908"));
-    printf ("%.4f\n", strToFloat("-867.6921"));
-    return 0;
+    float result = 0;
+    bool neg = false;
+    char *dec = str;
+
+    if (*str == '-') {
+        neg = true;
+        str++;
+    }
+
+    while (*dec != '.' && *dec)
+        dec++;
+
+    while ((*str >= '0' && *str <= '9') || *str == '.') {
+        if ( str != dec ) {
+            printf ("%li\n", dec - str);
+            result += (*str - '0') * pow(10, dec - str - (dec > str));
+        }
+        str++;        
+    }
+
+    if (neg)
+        return result * -1;
+    else
+        return result;
 }

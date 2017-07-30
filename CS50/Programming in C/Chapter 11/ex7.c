@@ -1,41 +1,33 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int bin_size (unsigned int n)
+int int_size()
 {
-    int result = 0;
+    int n = ~0;
+    int bits = 0;
 
-    while ( n )
-    {
-        result++;
-        n /= 2;
-    }
-    return result;
+    while ( n < 0 )
+        n <<= 1, bits++;
+
+    return bits;
 }
 
-int extract_n_bits (int pattern, int bits)
+int bitpat_get(unsigned int word, int start, int bit_count)
 {
-    int mask = 0;
+    int counter = 0;
+    int intSize = int_size();
+    int mask = ((unsigned int)~0 >> (intSize - bit_count)) << (intSize - start - bit_count);
 
-    for (int i = 0; i < bits; i++)
-        mask |= 1 << i;
+    // shift word to start at the first active bit
+    while ((int)word > 0 && word != 0)
+        word <<= 1;
 
-    return pattern & mask;
+    return (word & mask) >> (intSize - start - bit_count);
 }
 
-int bitpat_get (unsigned int source, int start, int bits)
+int main (int argc, char *argv[])
 {
-    int size = bin_size(source);
-    int result = source >> (size - start - bits);
-    result = extract_n_bits(result, bits);
-    result = result << (size - start - bits);
-    return result;
-}
+    printf ("%i\n", bitpat_get(123456, 0, 3));
+    printf ("%i\n", bitpat_get(123456, 3, 5));
 
-int main(void)
-{
-    int n1 = 0xe1f4;
-    printf ("%i\n", n1);
-    int extract = bitpat_get(n1, 12, 3);
-    printf ("%i\n", extract);
     return 0;
 }

@@ -1,25 +1,19 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int calculateTriangularNumber (int n)
-{
-    int i, triangularNumber = 0;
+int calculateTriangularNumber (int n) {
+    int triNum = 0;
 
-    for ( i = 1; i <= n; i++ )
-        triangularNumber += i;
+    for (int i = 1; i <= n; ++i)
+        triNum += i;
 
-    return triangularNumber;
+    return triNum;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    printf ("Trianguler number %i is %i.\n", 10,
-            calculateTriangularNumber (10));
-    
-    printf ("Trianguler number %i is %i.\n", 20,
-            calculateTriangularNumber (20));
-
-    printf ("Trianguler number %i is %i.\n", 50,
-            calculateTriangularNumber (50));
+    printf ("triNum of 10 is %i\n",calculateTriangularNumber(10));
+    printf ("triNum of 20 is %i\n",calculateTriangularNumber(20));
+    printf ("triNum of 30 is %i\n",calculateTriangularNumber(30));
 
     return 0;
 }

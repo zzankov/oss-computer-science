@@ -1,18 +1,16 @@
 # include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int     value1, value2;
-    
-    printf ("Please give me 2 integers: ");
-    scanf  ("%i%i", &value1, &value2);
-    
-    if ( value1 % value2 == 0 )
-        printf ("Number %i is evenly divisable by number %i.\n", value1, 
-            value2);
+    int value1, value2;
+
+    printf ("Enter your two values: ");
+    scanf ("%i %i", &value1, &value2);
+
+    if ( value1 % value2 == 0)
+        printf ("Awesome!\n");
     else
-        printf ("Number %i is not evenly divisable by number %i.\n",
-            value1, value2);
-    
+        printf ("Meh...\n");
+
     return 0;
 }

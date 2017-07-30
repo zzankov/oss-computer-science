@@ -1,12 +1,11 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-	int		values[10];
-	int		i, index;
-    
-    for ( i = 0; i < 10; i++)
-        values[i] = 0;
+	int values[10];
+
+	for (int i = 0; i < 10; ++i)
+		values[i] = 0;
 
 	values[0] = 197;
 	values[2] = -100;
@@ -14,9 +13,9 @@ int main(void)
 	values[3] = values[0] + values[5];
 	values[9] = values[5] / 10;
 	--values[2];
-	
-	for ( index = 0; index < 10; index++ )
-		printf ("values[%i] = %i\n", index, values[index]);
-	
+
+	for ( int i = 0; i < 10; ++i)
+		printf ("values[%i] = %i\n", i, values[i]);
+
 	return 0;
 }

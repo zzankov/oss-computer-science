@@ -1,30 +1,30 @@
 // Function to determine if two strings are equal
-# include <stdio.h>
-# include <stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-bool equalStrings(const char str1[], const char str2[])
-{
-    int   i = 0;
+bool eqStr (const char s1[], const char s2[]) {
+    int i = 0;
     bool areEqual;
-
-    while ( str1[i] == str2[i] && str1[i] != '\0' && str2[i] != '\0' )
+    while ( s1[i] == s2[i] && s1[i] & s2[i] )
         i++;
-    if ( str1[i] == '\0' && str2[i] == '\0' )
+
+    if ( !s1[i] && !s2[i] )
         areEqual = true;
     else
         areEqual = false;
+    
     return areEqual;
 }
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    // prototyping
-    bool equalStrings(const char str1[], const char str2[]);
+    bool eqStr (const char s1[], const char s2[]);
     const char stra[] = "string compare test";
     const char strb[] = "string";
-    printf ("%i\n", equalStrings (stra, strb));
-    printf ("%i\n", equalStrings (stra, stra));
-    printf ("%i\n", equalStrings (strb, "string"));
+
+    printf ("%i\n", eqStr (stra, strb));
+    printf ("%i\n", eqStr (stra, stra));
+    printf ("%i\n", eqStr (strb, "string"));
 
     return 0;
 }

@@ -1,16 +1,16 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int n, number, triangularNumber = 0;
-    
-    printf  ("What triangular number do you want? ");
-    scanf   ("%i", &number);
-    
-    for (n = 1; n <= number; n++)
-        triangularNumber += n;
-    
-    printf ("Triangular number %i is %i\n", number, triangularNumber);
-    
+    int number, triangularNumber = 0;
+
+    printf("What triangular number do you want? ");
+    scanf("%i", &number);
+
+    for(int n = 1; n <= number; triangularNumber += n, n++)
+        ;
+
+    printf("Triangular number %i is %i\n", number, triangularNumber);
+
     return 0;
 }

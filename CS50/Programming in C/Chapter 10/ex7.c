@@ -1,41 +1,46 @@
-# include <stdio.h>
+// Program to sort an array of integers into ascending order
+#include <stdio.h>
 
-void sort (int *arr, int n)
-{
-    int *inside_loop;
-    int *arr_end = arr + n;
-    while (arr < (arr_end - 1))
+void sort(int *a, int n) {
+    int *aEnd = a + n;
+    int temp;
+    int *b;
+
+    while (a < aEnd - 1)
     {
-        inside_loop = arr + 1;
-        while (inside_loop < arr_end) 
+        b = a + 1;
+        while (b < aEnd)
         {
-            if ( *arr > *inside_loop ) {
-                n = *arr;
-                *arr = *inside_loop;
-                *inside_loop = n;
+            if (*a > *b)
+            {
+                temp = *a;
+                *a = *b;
+                *b = temp;
             }
-        inside_loop++;
+            b++;
         }
-        arr++;
+        a++;
     }
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int i;
-    int array[16] = { 34, -5, 6, 0, 12, 100, 56, 22,
-        44, -3, -9, 12, 17, 22, 6, 11};
+    int array[16] = {34, -5, 6, 0, 12, 100, 56, 22,
+                    44, -3, -9, 12, 17, 22, 6, 11};
+
+    void sort(int *a, int n);
 
     printf ("The array before the sort:\n");
-    for ( i = 0; i < 16; i++ )
-        printf ("%i\t", *(array + i));
-    printf ("\n");
 
+    for ( int i = 0; i < 16; i++ )
+        printf ("%i ", array[i]);
+
+    printf("\n\nThe array after the sort:\n");
     sort(array, 16);
 
-    printf ("The array after the sort:\n");
-    for ( i = 0; i < 16; i++ )
-       printf ("%i\t", *(array + i));
+    for ( int i = 0; i < 16; i++ )
+        printf ("%i ", array[i]);
+
     printf ("\n");
 
     return 0;

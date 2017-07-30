@@ -19,25 +19,17 @@
         
                                                                              */
                                                                              
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void) 
+int main (int argc, char *argv[])
 {
-        
-    int n, result;
+
+    printf ("TABLE OF POWERS OF TWO\n\n");
+    printf (" n \t2 to the n\n");
+    printf ("---\t----------\n");
     
-    printf("TABLE OF POWERS OF TWO\n\n");
-    
-    printf(" n     Two to the n\n");
-    printf("---    ------------\n");
-    
-    result = 1;
-    
-    for(n=0;n<=10;++n) {
-        printf("%3i    %12i\n", n, result);
-        result *= 2;
-    }
-    
+    for (int n = 0, two_to_n = 1; n <= 10; two_to_n *= 2)
+        printf("%2i\t%10i\n", n++, two_to_n);
+
     return 0;
-    
- }
+}

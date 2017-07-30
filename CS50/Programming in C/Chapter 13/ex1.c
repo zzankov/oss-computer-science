@@ -1,17 +1,16 @@
-# include <stdio.h>
+#include <stdio.h>
 
 typedef int (*FunctionPtr)();
 
-int gimme5(void)
-{
-    return 5;
+int gimme10(void) {
+    return 10;
 }
-int main(void)
-{
-    FunctionPtr g = gimme5;
 
-    printf ("Gimme 5!\n%i\n", gimme5());
-    printf ("Gimme 5!\n%i\n", g());
+int main (int argc, char *argv[])
+{
+    FunctionPtr g = gimme10;
+
+    printf ("%i\n", g());
 
     return 0;
 }

@@ -1,19 +1,25 @@
-// function to sum the elements of an integer array
-# include <stdio.h>
+// Function to sum the elements of an integer array
+
+#include <stdio.h>
 
 int arraySum (int array[], const int n)
 {
-    int sum = 0, *ptr;
+    int sum = 0;
     int * const arrayEnd = array + n;
-    for ( ptr = array; ptr < arrayEnd; ptr++ )
-        sum += *ptr;
+
+    for ( ; array < arrayEnd; sum += *array, array++)
+        ;
+    
     return sum;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
     int arraySum (int array[], const int n);
-    int values[10] = { 3, 7, -9, 3, 6, -1, 7, 9, 1, -5 };
-    printf ("The sum is %i\n", arraySum (values, 10));
+    int values[10] = 
+        {3, 7, -9, 3, 6, -1, 7, 9, 1, -5};
+    
+    printf ("The sum is %i.\n", arraySum (values,10));
+
     return 0;
 }

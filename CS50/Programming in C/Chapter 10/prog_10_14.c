@@ -1,19 +1,25 @@
-# include <stdio.h>
+// Function to copy one string to another. Poitner Ver. 2
+#include <stdio.h>
+
 void copyString (char *to, char *from)
 {
     while (*from)
         *to++ = *from++;
+
     *to = '\0';
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
     void copyString (char *to, char *from);
-    char string1[] = "A string to be copied.";
-    char string2[50];
-    copyString (string2, string1);
-    printf ("%s\n", string2);
-    copyString (string2, "So is this.");
-    printf ("%s\n", string2);
+    char str1[] = "A string to be copied.";
+    char str2[50];
+
+    copyString(str2, str1);
+    printf("%s\n", str2);
+
+    copyString(str2, "So is this.");
+    printf("%s\n", str2);
+
     return 0;
 }

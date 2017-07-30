@@ -3,7 +3,6 @@
 
 int main (void)
 {
-    int i;
     struct month
     {
         int   numberOfDays;
@@ -21,7 +20,7 @@ int main (void)
     };
     printf ("Month\tNumber of Days\n");
     printf ("-----\t--------------\n");
-    for ( i = 0; i < 12; i++ )
+    for ( int i = 0; i < 12; i++ )
         printf (" %c%c%c \t%7i\n", months[i].name[0], months[i].name[1],
                 months[i].name[2], months[i].numberOfDays);
     return 0;

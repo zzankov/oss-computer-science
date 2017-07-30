@@ -1,24 +1,19 @@
-# include <stdio.h>
+#include <stdio.h>
 
-float power(float a, int b)
-{
-    int i;
-    float result = a;
-    for (i = 1; i < b; i++)
-        result *= a;
-    
+long double power (double num, int pow) {
+    double result = 1;
+
+    for (int i = 0; i < pow; i++)
+        result *= num;
+
     return result;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    float poli, x = 2.55;
+    double x = 2.55;
     
-    poli = 3 * power(x, 3) - 5 * power(x, 2) + 6;
-    
-    printf("%g\n", poli);
-    
+    printf ("%Lg\n", 3 * power(x, 3) - 5 * power(x, 2) + 6);
+
     return 0;
 }
-
-

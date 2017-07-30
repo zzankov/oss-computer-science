@@ -1,15 +1,18 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main (void)
-{
-    long int x_to_the_n (int x, int n);
-    printf ("number %i to the %i = %li\n", 5, 2, x_to_the_n (5, 2));
-    return 0;
+long int x_to_the_n(int x, unsigned int n) {
+    long int result = 1;
+    for (int i = 0; i < n; ++i, result *= x)
+        ;
+    
+    return result;
 }
 
-long int x_to_the_n (int x, int n)
+int main (int argc, char *argv[])
 {
-    for ( int i = 0; i < n - 1; i++ )
-        x *= x;
-    return x;
+    for (int i = 0; i < 5; ++i)
+        for ( int j = 0; j < 5; j++)
+            printf ("%i^%i = %li\n", i, j, x_to_the_n(i, j));
+
+    return 0;
 }

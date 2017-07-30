@@ -1,15 +1,17 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
     char c = 'Q';
-    char *charPtr = &c;
-    printf ("%c\t%c\n", c, *charPtr);
+    char *cPtr = &c;
+
+    printf ("%c %c\n", c, *cPtr);
+
     c = '/';
-    printf ("%c\t%c\n", c, *charPtr);
-    *charPtr = ')';
-    printf ("%c\t%c\n", c, *charPtr);
+    printf ("%c %c\n", c, *cPtr);
+    
+    *cPtr = '(';
+    printf ("%c %c\n", c, *cPtr);
 
     return 0;
-
 }

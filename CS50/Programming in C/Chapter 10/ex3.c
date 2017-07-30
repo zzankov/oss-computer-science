@@ -1,46 +1,50 @@
-# include <stdio.h>
+#include <stdio.h>
 
-struct entry
+struct entry 
 {
     int value;
     struct entry *next;
 };
 
-void insertEntry(struct entry *to_insert, struct entry *after)
+void insertEntry(struct entry *toInsert, struct entry *after)
 {
-    (*to_insert).next = (*after).next;
-    (*after).next = to_insert;
+    toInsert->next = after->next;
+    after->next = toInsert;
 }
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    struct entry n1, n2, n3, n21;
-    struct entry *lpr;
-    lpr = &n1;
+    void insertEntry(struct entry *toInsert, struct entry *after);
+    struct entry n1, n2, n3, insert, start, *lPtr;
+
     n1.value = 100;
     n1.next = &n2;
+
     n2.value = 200;
     n2.next = &n3;
+
     n3.value = 300;
     n3.next = NULL;
-    n21.value = 250;
-    n21.next = NULL;
+    
+    insert.value = 250;
+    insert.next = NULL;
 
-    while ( lpr )
-    {
-        printf ("%i\n", lpr->value);
-        lpr = lpr->next;
+    start.next = &n1;
+
+    lPtr = start.next;
+    printf("Original list: \n");
+    while (lPtr) {
+        printf("%i\n", lPtr->value);
+        lPtr = lPtr->next;
     }
 
-    printf ("\nInserting a new entry at the beginning of the list.\n");
-    struct entry bgn = {0, &n1};
-    insertEntry(&n21, &bgn);
-    lpr = &n21;
+    printf("\nInserting entry: \n");    
+    insertEntry(&insert, &start);
+    lPtr = start.next;
 
-    while ( lpr )
-    {
-        printf ("%i\n", lpr->value);
-        lpr = lpr->next;
+    while (lPtr) {
+        printf("%i\n", lPtr->value);
+        lPtr = lPtr->next;
     }
 
     return 0;

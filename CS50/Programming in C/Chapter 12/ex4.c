@@ -1,19 +1,12 @@
-# include <stdio.h>
-# define MAX(X,Y) ((X)>(Y)?(X):(Y))
-# define MAX3(X,Y,Z) (MAX((MAX((X),(Y))),(MAX((Y),(Z)))))
+#include <stdio.h>
 
-int main(void)
+#define MAX(x,y) ((x) < (y) ? (y) : (x))
+#define MAX3(x,y,z) (MAX(MAX((x),(y)),(z)))
+
+int main (int argc, char *argv[])
 {
-    int a, b, c;
-
-    printf ("Give me integer x: ");
-    scanf  ("%i", &a);
-    printf ("Give me integer y: ");
-    scanf  ("%i", &b);
-    printf ("Give me integer z: ");
-    scanf  ("%i", &c);
-
-    printf ("MAX3(X,Y,Z) = %i\n", MAX3(a,b,c));
+    int a = 5, b = 6, c = 9;
+    printf ("MAX3(%i,%i,%i) = %i\n", a, b, c, MAX3(a, b, c));
 
     return 0;
 }

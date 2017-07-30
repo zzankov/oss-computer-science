@@ -1,27 +1,19 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <time.h>
+#include <stdio.h>
 
-int main (void)
-{
-    int   a[10]; 
-    unsigned long long int arraySum(int num_elements, int array[]);
-
-    srand(time(NULL));
-
-    for ( int i = 0; i < 10; i++ )
-        a[i] = rand() % 10 + 1;
-
-    printf ("The sum of the elements of the array is %llu\n",
-            arraySum(10, a));
-
-    return 0;
+int arraySum(int array[], int numElements) {
+    int sum = 0;
+    for (int i = 0; i < numElements; sum += array[i], ++i)
+        ;
+    return sum;
 }
 
-unsigned long long int arraySum(int num_elements, int array[])
+int main (int argc, char *argv[])
 {
-    unsigned long long int  result = 0;
-    for ( int i = 0; i < num_elements; i++ )
-        result += array[i];
-    return result;
+    int arraySum(int array[], int numElements);
+    int myArray[10] = { 5, 1, 6, 12, 98, 
+                        1, 3, 9, 123, 16};
+    
+    printf ("The sum of my array is %i\n", arraySum(myArray, 10));
+
+    return 0;
 }

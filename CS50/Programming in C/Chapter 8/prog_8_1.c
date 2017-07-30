@@ -1,25 +1,22 @@
 // Program to illustrate a structure
+#include <stdio.h>
 
-# include <stdio.h>
-
-int main (void)
+int main (int argc, char *argv[])
 {
-    // define structure
-    struct date
-    {
-        int   month;
-        int   day;
-        int   year; 
+    struct date {
+        int month;
+        int day;
+        int year;
     };
 
-    struct date   today; // initiate variable
+    struct date today;
 
     today.month = 9;
-    today.day = 20;
+    today.day = 25;
     today.year = 2015;
 
-    printf ("Today's date is %i/%i/%.2i.\n", today.month, today.day,
-            today.year % 100);
+    printf ("Today's date is %.2i/%.2i/%.4i.\n", today.month, today.day,
+        today.year);
 
     return 0;
 }

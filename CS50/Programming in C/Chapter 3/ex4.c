@@ -1,12 +1,14 @@
 # include <stdio.h>
 
-int main(void)
+int main (int argc, char argv[])
 {
-    float C, F = 27.0;
-    
-    C = (F - 32) / 1.8;
-    
-    printf ("%g degrees Fahrenheit (F) is %g degrees Celsius (C).\n", F, C);
-    
-    return 0;
+    float celcius = 27;
+	float fahrenheit;
+
+	fahrenheit = celcius * 1.8 + 32;
+
+	printf("%g degrees Celcius is %g degrees Fahrenheit\n", 
+		celcius, fahrenheit);
+	
+	return 0;
 }

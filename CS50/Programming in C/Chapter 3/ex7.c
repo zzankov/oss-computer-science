@@ -1,23 +1,12 @@
-# include <stdio.h>
+#include <stdio.h>
+#include <math.h>
 
-float power(float a, int b)
+int main (int argc, char *argv[])
 {
-    int i;
-    float result = a;
-    for (i = 1; i < b; i++)
-        result *= a;
-    
-    return result;
-}
+    printf ("%E\n", 
+        (3.31 * pow(10, -8) * 2.01 * pow(10, -7)) / 
+        (7.16 * pow(10, -6) + 2.01 * pow(10, -8))
+    );
 
-int main(void)
-{
-    double result;
-    result = (3.31 / power(10, 8) * 2.01 / power(10, 7)) / 
-        (7.16 / power(10, 6) + 2.01 / power(10,8));
-      
-    printf ("The result is %g\n.", result);
-    printf ("The result is %e\n.", result);
-    
     return 0;
 }

@@ -1,13 +1,17 @@
-// Program to print the number of days in the month
-# include <stdio.h>
-int main(void)
+// Program to print the number of days in a month
+
+#include <stdio.h>
+
+int main (int argc, char *argv[])
 {
-    enum month { January = 1, February, March, April, May, June,
-            July, August, September, October, November, December};
+    enum month {January = 1, February, March, April, May, June, 
+        July, August, September, October, November, December};
     enum month aMonth;
-    int         days;
+    int days;
+
     printf ("Enter month number: ");
-    scanf  ("%i", &aMonth);
+    scanf("%u", &aMonth);
+
     switch (aMonth) {
         case January:
         case March:
@@ -25,20 +29,22 @@ int main(void)
         case November:
             days = 30;
             break;
-            
+        
         case February:
             days = 28;
             break;
-
+        
         default:
-            printf ("bad month number\n");
+            printf ("Bad month number\n");
             days = 0;
             break;
     }
 
-    if ( days != 0 )
+    if (days)
         printf ("Number of days is %i\n", days);
-    if ( aMonth == February)
-        printf ("...or 29 if it's a leap year");
+    
+    if (aMonth == February)
+        printf ("...or 29 if it is a leap year\n");
+
     return 0;
 }

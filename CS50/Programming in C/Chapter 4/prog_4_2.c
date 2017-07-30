@@ -1,17 +1,15 @@
 /*  Program to calculate the 200th triangular number
-    Introduction of the for statement                                       */
+    Introduction to the for statement               */
 #include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int n, triangularNumber;
+    int triangularNumber = 0;
+
+    for(int n = 1; n <= 200; n++, triangularNumber += n)
+        ;
     
-    triangularNumber = 0;
-    
-    for (n = 1; n <= 200; n = n + 1)
-        triangularNumber = triangularNumber + n;
-    
-    printf("The 200th triangular number is %i\n", triangularNumber);
-    
+    printf ("The 200th Triangular number is %i\n", triangularNumber);
+
     return 0;
-}    
+}

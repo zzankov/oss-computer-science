@@ -1,39 +1,37 @@
 // Program to convert a positive integer to another base
 
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    const char baseDigits[16] = { '0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-    int         convertedNumber[64];
-    long int    numberToConvert;
-    int         nextDigit, base, index = 0;
+    const char baseDigits[16] = {'0', '1', '2', '3', '4', 
+        '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    int convertedNumber[64];
+    long int numberToConvert;
+    int nextDigit, base, index = 0;
 
-    // get number and the base
+    // get number and base
 
     printf ("Number to be converted? ");
-    scanf  ("%li", &numberToConvert);
+    scanf ("%li", &numberToConvert);
     printf ("Base? ");
-    scanf  ("%i", &base);
+    scanf ("%i", &base);
 
-    // convert to the indicated base
-    
+    // convert to indicated base
+
     do {
         convertedNumber[index] = numberToConvert % base;
-        ++index;
         numberToConvert /= base;
-    } while ( numberToConvert != 0 );
+        ++index;
+    } while (numberToConvert != 0);
 
     // display the results in reverse order
 
-    printf ("Converted number = ");
-
-    for (--index; index >= 0; --index) {
-        nextDigit = convertedNumber[index];
-        printf ("%c", baseDigits[nextDigit]);
-    }
-
+    printf ("Conveted number = ");
+    
+    for (--index; index >= 0; --index)
+        printf("%c", baseDigits[convertedNumber[index]]);
+    
     printf ("\n");
 
     return 0;

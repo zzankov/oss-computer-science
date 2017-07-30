@@ -1,20 +1,23 @@
-# include <stdio.h>
-void copyString (char *to, char *from)
+#include <stdio.h>
+
+void copyString ( char *to, char *from)
 {
-    for ( ; *from != '\0'; *from++, *to++ )
-        *to = *from;
+    for ( ; *from; *to++ = *from++)
+        ;
     *to = '\0';
 }
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    void copyString (char *to, char *from);
-    char string1[] = "A string to be copied.";
-    char string2[50];
-    copyString (string2, string1);
-    printf ("%s\n", string2);
-    copyString (string2, "So this is it");
-    printf ("%s\n", string2);
-    
+    void copyString( char *to, char *from);
+    char str1[] = "A string to be copied.";
+    char str2[50];
+
+    copyString(str2, str1);
+    printf ("%s\n", str2);
+
+    copyString(str2, "So is this.");
+    printf ("%s\n", str2);
+
     return 0;
 }

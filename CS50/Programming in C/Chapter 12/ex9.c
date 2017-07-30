@@ -1,11 +1,13 @@
-# include <stdio.h>
-# define ABSOLUTE_VALUE(X)  (((X)<0)?(-(X)):(X))
+#include <stdio.h>
 
-int main(void)
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+
+int main (int argc, char *argv[])
 {
-    int a = -5;
-    printf ("Absolute value of %i is %i\n", a, ABSOLUTE_VALUE(a));
-    printf ("Absolute value of %i is %i\n", a + 2, ABSOLUTE_VALUE(a + 2));
+    printf ("ABS(%i) = %i\n", 5, ABS(5));
+    printf ("ABS(%i) = %i\n", -5, ABS(-5));
+    printf ("ABS(%i) = %i\n", 5 + 10, ABS(5 + 10));
+    printf ("ABS(%i) = %i\n", -5 * 10, ABS(-5 * 10));
 
     return 0;
 }

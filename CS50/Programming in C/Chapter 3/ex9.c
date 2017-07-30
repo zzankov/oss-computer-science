@@ -1,28 +1,19 @@
 # include <stdio.h>
 
-int Next_multiple(int i, int j)
-{
-    int result;
-    result = i + j - i % j;
-    
-    return result;
+int NextLargestMultiple(int i, int j) {
+	return i + j - i % j;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    printf("Example from exercise 8: \n");
-    printf("For i = 256 and j = 7 the next multiple is %i.\n\n", 
-        Next_multiple(256, 7));
-    
-    printf("Examples from exercise 9: \n");
-    printf("For i = 365 and j = 7 the next multiple is %i.\n", 
-        Next_multiple(365, 7));
-        
-    printf("For i = 12258 and j = 23 the next multiple is %i.\n", 
-        Next_multiple(12258, 23));
-        
-    printf("For i = 996 and j = 4 the next multiple is %i.\n", 
-        Next_multiple(996, 4));
-        
-    return 0;
+	int k;
+	int i[] = {365, 12258, 996};
+	int j[] = {7, 23, 4};
+
+	for (k = 0; k < 3; k++)
+		printf ("NLM of %i and %i is %i\n", i[k], j[k], 
+			NextLargestMultiple(i[k], j[k]));
+
+	return 0;
+
 }

@@ -1,49 +1,39 @@
 // Program to illustrate arrays of structures
-# include <stdio.h>
+#include <stdio.h>
 
 struct time
 {
-    int   hour;
-    int   minute;
-    int   second;
+    int hour;
+    int minutes;
+    int seconds;
 };
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    // function prototype
-    struct time timeUpdate ( struct time now );
-
+    struct time timeUpdate (struct time now);
     struct time testTimes[5] = 
     {
-        { 11, 59, 59 }, { 12,  0,  0 }, { 1, 29, 59 },
-        { 23, 59, 59 }, { 19, 12, 27 }
+        {11, 59, 59}, {12, 0, 0}, {1, 29, 59},
+        {23, 59, 59}, {19, 12, 27}
     };
-    int i;
 
-    for ( i = 0; i < 5; ++i ) {
-        printf ("Time is %.2i:%.2i:%.2i", testTimes[i].hour, testTimes[i].minute,
-                testTimes[i].second);
-        testTimes[i] = timeUpdate (testTimes[i]);
-        printf ("... one second later it's %.2i:%.2i:%.2i\n",
-                testTimes[i].hour, testTimes[i].minute, testTimes[i].second);
+    for (int i = 0; i < 5; i++) {
+        printf ("Time is %.2i:%.2i:%.2i", testTimes[i].hour,
+            testTimes[i].minutes, testTimes[i].seconds);
+        testTimes[i] = timeUpdate(testTimes[i]);
+        printf ("...one second later it's %.2i:%.2i:%.2i\n",
+            testTimes[i].hour, testTimes[i].minutes, 
+            testTimes[i].seconds);
     }
 
     return 0;
 }
 
-struct time  timeUpdate ( struct time now)
-{
-    ++now.second;
+// function to update time by 1 second
+struct time timeUpdate (struct time now) {
+    !(now.seconds = (now.seconds + 1) % 60) ? 
+        !(now.minutes = (now.minutes + 1) % 60) ? 
+            now.hour = (now.hour + 1) % 24 : 0 : 0;
 
-    if ( now.second == 60 ) {     // next minute
-        now.second = 0;
-        ++now.minute;
-        if ( now.minute == 60 ) {   // next hour
-            now.minute = 0;
-            ++now.hour;
-            if ( now.hour == 24 )
-                now.hour = 0;
-        }
-    }
     return now;
 }

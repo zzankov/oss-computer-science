@@ -1,23 +1,22 @@
-# include <stdio.h>
+#include <stdio.h>
 
-void removeString (char source[], int start, int chars_num)
+void removeString(char *text, int start, int characters)
 {
-    int i = 0;
-    while ( source[i++] )
-        if ( i >= start )
-            source[i] = source[i + chars_num];
-
-    while (source[i]) 
-        source[i++] = '\0';
+    text += start;
+    while (text[characters]) {
+        *text = text[characters];
+        text++;
+    }
+       
+    *text = '\0';
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    // prototype
-    void removeString (char source[], int start, int chars_num);
-    char text[] = "the wrong son";
-    printf ("text = %s\n", text);
-    removeString(text, 4, 6);
-    printf ("removeString(text, 4, 6) = %s\n", text); 
+    char str[] = "the wrong son";
+    printf("%s\n", str);
+    removeString(str, 4, 6);
+    printf("%s\n", str);
+
     return 0;
 }

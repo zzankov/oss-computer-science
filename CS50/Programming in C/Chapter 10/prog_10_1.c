@@ -1,15 +1,14 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
     int count = 10, x;
-    int *ptr;
-    ptr = &count;
-    x = *ptr;
-    printf ("count = %i, x = %i, ptr = %i\n", count, x, *ptr);
-    x = 5;
-    printf ("count = %i, x = %i, ptr = %i\n", count, x, *ptr);
-    *ptr = 15;
-    printf ("count = %i, x = %i, ptr = %i\n", count, x, *ptr);
+    int *intPtr;
+
+    intPtr = &count;
+    x = *intPtr;
+
+    printf ("count = %i, x = %i\n", count, x);
+
     return 0;
 }

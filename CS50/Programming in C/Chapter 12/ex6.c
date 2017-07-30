@@ -1,12 +1,11 @@
-# include <stdio.h>
-# define IS_UPPER_CASE(C)   (((C)>=65)&&((C)<=90))
+#include <stdio.h>
 
-int main(void)
+#define IS_UPPER_CASE(c) ((c) >= 'A' && (c) <= 'Z')
+
+int main (int argc, char *argv[])
 {
-    char a, b;
-    a = 'a';
-    b = 'B';
+    printf ("IS_UPPER_CASE(%c) = %i\n", 'f', IS_UPPER_CASE('f'));
+    printf ("IS_UPPER_CASE(%c) = %i\n", 'F', IS_UPPER_CASE('F'));
 
-    printf ("Is character variable 'a' upper case? %i\n", IS_UPPER_CASE(a));
-    printf ("Is character variable 'b' upper case? %i\n", IS_UPPER_CASE(b));
+    return 0;
 }

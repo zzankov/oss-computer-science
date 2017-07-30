@@ -1,109 +1,95 @@
-# include <stdio.h>
-# include <stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-// function to find a string location
-int findString (const char source[], const char search[])
+int findString (char *source, char *search)
 {
-    int match, j = 0;
-    for ( int i = 0; source[i]; i++ ) {
-        while ( search[j] ) {
-            match = 1;
-            if ( search[j] != source[i + j] ) {
-                match = 0;
-                break;
-            }
-            j++;
-        }
-        if ( match )
+    int i = 0;
+    _Bool match;
+    while (*source)
+    {
+        match = true;
+        for (int j = 0; search[j]; j++)
+            if (source[j] != search[j])
+                match = false;
+
+        if (match)
             return i;
+        i++;
+        source++;
     }
+
     return -1;
 }
 
-// function to remove a substring
-void removeString (char source[], int start, int chars_num)
+void removeString(char *text, int start, int characters)
 {
-    int i = 0;
-    while ( source[i++] ) {
-        if ( i >= start ) {
-            source[i] = source[i + chars_num];
-        }
+    text += start;
+    while (text[characters]) {
+        *text = text[characters];
+        text++;
     }
-
-    while (source[i]) 
-        source[i++] = '\0';
+       
+    *text = '\0';
 }
 
-// function to add a substring
 void insertString (char source[], const char insert[], int start)
 {
-    int i = 0, j = 0; 
+    int i = 0, j = 0;
     char temp[100];
-
-    while ( source[i + start] ) {
-        temp[i] = source[i + start];
-        i++;
-    }
-
-    temp[i] = '\0';
-    i = 0;
     
-    while ( insert[i] ) { 
-        source[i + start] = insert[i];
+    while (source[start + i])
+    {
+        temp[i] = source[start + i];
         i++;
-    } 
-
-    while ( temp[j] )
-        source[i++ + start] = temp[j++];
-}
-
-// function to replace a string
-bool replaceString(char source[], const char to_replace[],
-        const char substitute[])
-{
-    int start;
-    int i = 0;
-    while (to_replace[i])
-        i++;
-
-    start = findString(source, to_replace); 
-
-    if ( start != -1 ) {
-        removeString(source, start, i);
-        insertString(source, substitute, start);
-        return true;
     }
-    else
-        return false;
+    temp[i] = '\0';
+
+    i = 0;
+    while (insert[i]) 
+    {
+        source[start + i] = insert[i];
+        i++;
+    }
+
+    while (temp[j])
+        source[i++ + start] = temp[j++];
+    source[i + start] = '\0';
 }
 
-int main(void)
+bool replaceString(char source[], char s1[], char s2[])
 {
+    int findString (char *source, char *search);
+    void removeString(char *text, int start, int characters);
+    void insertString (char source[], const char insert[], int start);
+    int strLen(char *str);
+    int s1_pos;
+    s1_pos = findString(source, s1);
+    if (s1_pos != -1) {
+        removeString(source, s1_pos, strLen(s1));
+        insertString(source, s2, s1_pos);
+    } 
+    return s1_pos != -1;
+}
+
+int strLen(char *str)
+{
+    int i = 0;
+    while (str[i])
+        i++;
+    return i;
+}
+
+int main (int argc, char *argv[])
+{
+    char text[] = "He is 1 ugly bastard!";
+    replaceString(text, "1", "one");
+    printf ("%s\n", text);
     bool stillFound;
-    char text1[100] = "This is 1 sick SOB!";
-    char text2[100] = "SELECT * Tashaci FROM Maina.com";
-
-    printf ("text = '%s'\n", text1);
-    replaceString(text1, "1", "one");
-    printf ("new text = '%s'\n", text1);
-
-    printf ("text = '%s'\n", text2);
-    replaceString(text2, "*", "");
-    printf ("new text = '%s'\n", text2);
-
-    do
-    {
-        stillFound = replaceString(text1, " ", "");
-    } while (stillFound); 
-
-    printf ("text = '%s'\n", text1);
-
-    do
-    {
-        stillFound = replaceString(text2, " ", "");
-    } while (stillFound); 
-
-    printf ("text = '%s'\n", text2);
+    do {
+        stillFound = replaceString(text, " ", "");
+        printf ("%s\n", text);
+    }
+    while (stillFound);
 
     return 0;
 }

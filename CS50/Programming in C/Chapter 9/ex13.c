@@ -1,23 +1,21 @@
-# include <stdio.h>
+#include <stdio.h>
 
-void to_upper (char source[])
+char uppercase(char c)
 {
-    int i = 0;
-    char mod = 'a' - 'A';
-    while ( source[i] != '\0' )
-    {
-        if ( source[i] >= 'a' && source[i] <= 'z' )
-            source[i] -= mod;
-        i++;
-    }
+    if (c >= 'a' && c <= 'z')
+        return c - 'a' + 'A';
+    else
+        return c;
 }
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    char word[] = "This is really annoying though";
-
-    printf ("text = '%s'\n", word);
-    to_upper(word);
-    printf ("converted = '%s'\n", word);
+    char c;
+    do 
+    {
+        c = getchar();
+        printf("%c", uppercase(c));
+    } while (c != '=');
+    
     return 0;
 }

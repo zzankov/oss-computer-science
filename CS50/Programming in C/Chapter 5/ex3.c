@@ -1,16 +1,16 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int     value1, value2;
-    
-    printf ("Please give me two integer values: ");
-    scanf  ("%i%i", &value1, &value2);
-    
-    if ( value2 == 0 )
-        printf ("Division by zero\n");
+    int value1, value2;
+
+    printf ("Enter your two values: ");
+    scanf ("%i %i", &value1, &value2);
+
+    if (value2 == 0)
+        printf ("Division by 0.\n");
     else
-        printf ("%i divided by %i is %.3f.\n", value1, value2, (float) value1 / value2);
-    
+        printf ("%i / %i = %.3f\n", value1, value2, (float) value1 / value2 );
+
     return 0;
 }

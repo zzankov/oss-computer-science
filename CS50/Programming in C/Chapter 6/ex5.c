@@ -1,15 +1,14 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int numbers[10] = {1};
-    int i, j;
+    int numbers[10] = {1, 0};
 
-    for ( j = 0; j < 10; ++j )
-        for ( i = 0; i < 10; i++ )
+    for ( int j = 0; j < 10; j++ )
+        for (int i = 0; i < j; i++ )
             numbers[j] += numbers[i];
-    
-    for ( j = 0; j < 10; ++j )
+
+    for ( int j = 0; j < 10; j++ )
         printf ("%i ", numbers[j]);
 
     printf ("\n");

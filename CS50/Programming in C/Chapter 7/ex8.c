@@ -1,45 +1,46 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main (void)
+int main (int argc, char *argv[])
 {
-    void solve_quadratic (void);
-    solve_quadratic();
-}
+    double a, b, c;
+    double squareRoot (double x);
+    double discriminant (double a, double b, double c);
+    double roots (double a, double b, double c, _Bool x);
 
-void solve_quadratic (void)
-{
-    double a, b, c, epsilon = 0.00001;
-    double x[2];
-    double squareRoot (double x, double epsilon);
+    printf ("Type in values for a, b and c: ");
+    scanf ("%lf %lf %lf", &a, &b, &c);
 
-    printf ("Please provide coefficients 'a', 'b' and 'c': ");
-    scanf  ("%lf%lf%lf", &a, &b, &c);
-
-    if ( (b * b - 4 * a * c) < 0 )
-        printf ("The roots of the equation are imaginary.\n");
+    if (discriminant(a, b, c) < 0)
+        printf ("The roots of the equation are imaginary\n");
     else
-    {
-        x[0] = (-b - squareRoot(b * b - 4 * a * c, epsilon)) / (2 * a);
-        x[1] = (-b + squareRoot(b * b - 4 * a * c, epsilon)) / (2 * a);
-        printf ("The roots of the equation are:\n");
-        printf ("x1 = %lf\n", x[0]);
-        printf ("x2 = %lf\n", x[1]);
-    }
+        printf ("The roots of the equation are x1 = %.4f, x2 = %.4f\n",
+            roots(a, b, c, 0), roots(a, b, c, 1));
+
+    return 0;
 }
 
-double squareRoot (double x, double epsilon)
-{
-    double guess = 1.0;
-    double absoluteValue (double x);
-    while ( absoluteValue ( guess * guess / x - 1 ) >= epsilon )
-        guess = ( x / guess + guess ) / 2.0;
-    return guess;
+double squareRoot (double x) {
+    const double epsilon = 0.000000001;
+    static double guess = 1;
+    guess = (x / guess + guess) / 2.0;
+
+    if ((float)(guess * guess - x) >= epsilon)
+        return squareRoot(x);
+    else
+        return guess;
 }
 
-double absoluteValue (double x)
-{
-    if ( x < 0 )
-        x = -x;
-    return x;
+double discriminant(double a, double b, double c) {
+    return b * b - 4 * a * c;
 }
 
+double roots (double a, double b, double c, _Bool x) {
+    double rts[2];
+    double squareRoot(double x);
+    double discriminant(double a, double b, double c);
+
+    if (x)
+        return (-b + squareRoot(discriminant(a, b, c))) / 2*a;
+    else
+        return (-b - squareRoot(discriminant(a, b, c))) / 2*a;
+}

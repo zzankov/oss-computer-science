@@ -1,31 +1,29 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-	int ratingCounters[11], i, response;
-	
-	for ( i = 1; i <= 10; ++i)
+	int ratingCounters[11], response;
+
+	// initialize array
+	for (int i = 1; i <= 10; i++)
 		ratingCounters[i] = 0;
-		
-	printf ("Enter your responses\n");
-    printf ("Enter 999 to indicate that you are done!\n");
 
-    while ( response != 999 ) {
-        scanf ("%i", &response);
+	printf("Enter your responses\n");
 
-        if ( response == 999 )
-            continue;
-        else if ( response < 1 || response > 10 )
+	do {
+		scanf("%i", &response);
+
+		if ( (response < 1 || response > 10) && response != 999)
 			printf ("Bad response: %i\n", response);
-		else	
+		else if (response != 999)
 			++ratingCounters[response];
-	}
+
+	} while (response != 999);
+
+	printf ("\n\nRating\tNumber of Responses\n");
+	printf ("------\t-------------------\n");
+	for (int i = 1; i <= 10; ++i)
+		printf("%4i\t%10i\n", i, ratingCounters[i]);
 	
-	printf ("\n\nRating    Number of Responses\n");
-	printf ("------    ------------------\n");
-	
-	for ( i = 1; i <= 10; ++i )
-		printf ("%4i%14i\n", i, ratingCounters[i]);
-		
 	return 0;
 }

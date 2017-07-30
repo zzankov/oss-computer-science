@@ -1,31 +1,29 @@
-// Program to reverse the digits of a number (v2)
+// Program to reverse a number
+#include <stdio.h>
+#include <stdbool.h>
 
-# include <stdio.h>
-# include <stdbool.h>
-
-int main(void)
+int main (int argc, char *argv[])
 {
-    int number, right_digit;
-    bool neg;
-    
-    printf ("Enter your number.\n");
-    scanf  ("%i", &number);
-    neg = number < 0;
-    
-    if ( neg )
+    int number;
+    bool negative = false;
+
+    printf ("Give me a number: ");
+    scanf ("%i", &number);
+
+    if (number < 0) {
+        negative = true;
         number = -number;
-    
+    }
+
     do {
-        right_digit = number % 10;
-        printf ("%i", right_digit);
+        printf ("%i", number % 10);
         number /= 10;
-    } 
-    while (number != 0);
-    
-    if ( neg )
-        printf ("%c", '-');
-    
+    } while (number != 0);
+
+    if (negative)
+        printf ("-");
     printf ("\n");
-    
+
     return 0;
+
 }

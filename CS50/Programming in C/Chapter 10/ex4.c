@@ -1,74 +1,48 @@
-# include <stdio.h>
+#include <stdio.h>
 
-struct entry
+struct entry 
 {
     int value;
     struct entry *next;
 };
 
-void insertEntry(struct entry *to_insert, struct entry *after)
+void removeEntry( struct entry *listPtr )
 {
-    (*to_insert).next = (*after).next;
-    (*after).next = to_insert;
+    struct entry *ptr = listPtr->next;
+    listPtr->next = ptr->next;
+    ptr->next = NULL;
 }
 
-void removeEntry(struct entry *remove_after)
+int main (int argc, char *argv[])
 {
-    struct entry *tmp;
-    tmp = remove_after->next;
-    remove_after->next = tmp->next;
-    tmp->next = NULL;
-}
+    void removeEntry(struct entry *listPtr);
+    struct entry n1, n2, n3, start, *lPtr;
 
-int main (void)
-{
-    struct entry n1, n2, n3, n21;
-    struct entry *lpr;
-    lpr = &n1;
     n1.value = 100;
     n1.next = &n2;
+
     n2.value = 200;
     n2.next = &n3;
+
     n3.value = 300;
     n3.next = NULL;
-    n21.value = 250;
-    n21.next = NULL;
 
-    while ( lpr )
-    {
-        printf ("%i\n", lpr->value);
-        lpr = lpr->next;
+    start.next = &n1;
+
+    lPtr = start.next;
+    printf("Original list: \n");
+    while (lPtr) {
+        printf("%i\n", lPtr->value);
+        lPtr = lPtr->next;
     }
 
-    printf ("\nInserting a new entry at the beginning of the list.\n");
-    struct entry bgn = {0, &n1};
-    insertEntry(&n21, &bgn);
-    lpr = bgn.next;
+    printf("\nInserting entry: \n");    
+    removeEntry(&start);
+    lPtr = start.next;
 
-    while ( lpr )
-    {
-        printf ("%i\n", lpr->value);
-        lpr = lpr->next;
-    }
-
-    printf ("\nRemoving the entry at the beginning of the list.\n");
-    removeEntry(&bgn);
-    lpr = bgn.next;
-
-    while ( lpr )
-    {
-        printf ("%i\n", lpr->value);
-        lpr = lpr->next;
-    }
-
-    printf ("\nRemoving the second entry of the list.\n");
-    removeEntry(&n1);
-    lpr = bgn.next;
-
-    while ( lpr )
-    {
-        printf ("%i\n", lpr->value);
-        lpr = lpr->next;
+    while (lPtr) {
+        printf("%i\n", lPtr->value);
+        lPtr = lPtr->next;
     }
 
     return 0;

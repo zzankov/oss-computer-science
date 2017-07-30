@@ -1,92 +1,59 @@
 // Program to convert a positive integer to another base
-# include <stdio.h>
+#include <stdio.h>
 
-// global variables
-long int  numberToConvert, temp;
-int       convertedNumber[64];
-int       base;
-int       digit = 0;
-_Bool     end;
+int convertedNumber[64];
+long int numberToConvert;
+int base;
+int digit = 0;
 
-// function to get the number and base required for the program
-void getNumberAndBase (void)
-{
-    base = 0; 
-    numberToConvert = 0;
-
+void getNumberAndBase(void) {
     printf ("Number to be converted? ");
-    scanf  ("%li", &numberToConvert); // get number to convert
-    end = (numberToConvert == 0);
-    if (end)
-        return;
-    printf ("Base? ");
-    scanf  ("%i", &base); // get base 
+    scanf ("%li", &numberToConvert);
 
-    // so long as the base is invalid the user will be prompted to give a valid
-    // base
-    while ( base < 2 || base > 16 ) {
-        printf ("Bad base - must be between 2 and 16\n");
-        printf ("Base? ");
+    do {
+        printf ("Base? (must be an integer between 2 and 16) ");
         scanf ("%i", &base);
-    }
+        
+    } while (base < 2 || base > 16);
 }
 
-// function to convert the number from one base 10 to a different base
-void convertNumber (void)
-{
-    // follow algorithm to convert number:
-    // 1) get modulo of base
-    // 2) (int) divide number by base
-    // 3) repeat until the nuber reaches 0
-    if (end)
-        return;
-
-    digit = 0;
-
-    for ( int i = 0; i < 64; i++ )
-        convertedNumber[i] = 0;
-
+void convertNumber(void) {
     do {
         convertedNumber[digit] = numberToConvert % base;
         ++digit;
         numberToConvert /= base;
-    } while ( numberToConvert != 0 );
+    } while (numberToConvert != 0);
 }
 
-// function to display the converted number (inverse print)
-void displayConvertedNumber (void)
-{
-    // set constant array to be read according to the converted number
-    const char  baseDigits[16] = {'0', '1', '2', '3', '4', '5', '6',
-        '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-    int nextDigit;
+void displayConvertedNumber (void) {
+    const char baseDigits[16] = 
+        {'0', '1', '2', '3', '4', '5', '6', '7',
+         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    if (end)
-        return;
+    printf ("Converted number = ");
 
-    // print converted number in an inverse order
-    printf ("Converted number: ");
-    for ( --digit; digit >= 0; digit-- ) {
-        nextDigit = convertedNumber[digit];
-        printf ("%c", baseDigits[nextDigit]);
-    }
+    for (--digit; digit >= 0; --digit) 
+        printf ("%c", baseDigits[convertedNumber[digit]]);
+    
+    digit = 0;
     printf ("\n");
 }
 
-// main function
-int main (void)
+int main (int argc, char *argv[])
 {
-    void getNumberAndBase (void), convertNumber (void), 
-         displayConvertedNumber (void);
+    void getNumberAndBase(void);
+    void convertNumber(void);
+    void displayConvertedNumber(void);
+    int times;
 
-    // convert as many numbers as the user likes until he types in the number
-    // zero as the number to be converted.
-    do {
+    printf ("How many numbers do you want to convert? ");
+    scanf ("%i", &times);
+
+    for ( int i = 0; i < times; ++i) {
         getNumberAndBase();
-        convertNumber(); 
-        displayConvertedNumber(); 
-    } while (!end); // use 0 as an exit number
-
-    // end program with a 0 exit to indicate no errors
+        convertNumber();
+        displayConvertedNumber();
+    }
+    
     return 0;
 }

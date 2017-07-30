@@ -1,34 +1,32 @@
-# include <stdio.h>
-# include <stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-int strToInt (const char numeric_string[])
+int strToInt (const char str[])
 {
-    int i = 0, intValue, result = 0;
-    bool negative = false;
-    if ( numeric_string[i] == '-' ) {
-        negative = true;
+    int result = 0;
+    int i = 0;
+    bool neg = false;
+    if (*str == '-') {
+        neg = true;
         i = 1;
     }
 
-    while ( numeric_string[i] >= '0' && numeric_string[i] <= '9' )
-    {
-        intValue = numeric_string[i] - '0';
-        result = result * 10 + intValue;
-        i++;
-    }
-
-    if ( negative )
-        result *= -1;
-    return result;
+    for ( ; str[i] >= '0' && str[i] <= '9'; i++ )
+        result = result * 10 + str[i] - '0';
+    if (neg)
+        return result * -1;
+    else
+        return result;
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int strToInt (const char numericString[]);
-    printf ("%i\n", strToInt("245"));
-    printf ("%i\n", strToInt("100") + 25);
-    printf ("%i\n", strToInt("13x5"));
-    printf ("%i\n", strToInt("-405"));
+    int strToInt (const char str[]);
+    char num[50];
+    printf ("Give me your integer: ");
+    scanf ("%s", num);
+    printf ("%i\n", strToInt(num));
+    printf ("%i\n", strToInt(num) + 25);
 
     return 0;
 }

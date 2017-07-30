@@ -1,30 +1,24 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int gcd (int u, int v)
-{
-    int temp;
-    while ( v != 0 ){
-        temp = u % v;
-        u = v;
-        v = temp;
-    }
-    return u;
-}
-
-int lcm (int u, int v)
-{
-    if ( u < 0 || v < 0 )
-        return -1;
+int gcd(int a, int b) {
+    if (a % b != 0)
+        return gcd(b, a % b);
     else
-        return (u * v / gcd (u, v));
+        return b;
 }
 
-int main (void)
+int lcm (int a, int b) {
+    int gcd(int a, int b);
+    return a * b / gcd(a,b);
+}
+
+int main (int argc, char *argv[])
 {
-    int u, v;
+    int lcm (int a, int b);
+    int gcd (int a, int b);
 
-    printf ("Provide values for 'u' and 'v': ");
-    scanf  ("%i%i", &u, &v);
+    printf ("lcm(%i, %i) = %i\n", 10, 15, lcm(10, 15));
 
-    printf ("The least common multiple is %i.\n", lcm (u, v));
+    return 0;
+
 }

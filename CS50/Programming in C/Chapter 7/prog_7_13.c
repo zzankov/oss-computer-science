@@ -1,44 +1,40 @@
-# include <stdio.h>
-int main(void)
+#include <stdio.h>
+
+int main (int argc, char *argv[])
 {
     void scalarMultiply (int matrix[3][5], int scalar);
     void displayMatrix (int matrix[3][5]);
-    int simpleMatrix[3][5] = 
+    int sampleMatrix[3][5] = 
         {
-            {  7, 16, 55, 13, 12 },
-            { 12, 10, 52,  0,  7 },
-            { -2,  1,  2,  4,  9 }
+            {7, 16, 55, 13, 12},
+            {12, 10, 52, 0, 7},
+            {-2, 1, 2, 4, 9}
         };
 
     printf ("Original matrix:\n");
-    displayMatrix (simpleMatrix);
+    displayMatrix (sampleMatrix);
 
-    scalarMultiply (simpleMatrix, 2);
     printf ("\nMultiplied by 2:\n");
-    displayMatrix (simpleMatrix);
+    scalarMultiply (sampleMatrix, 2);
+    displayMatrix (sampleMatrix);
 
-    scalarMultiply (simpleMatrix, -1);
-    printf ("Then multiplied by -1:\n");
-    displayMatrix (simpleMatrix);
+    printf("\nThen multiplied by -1:\n");
+    scalarMultiply (sampleMatrix, -1);
+    displayMatrix(sampleMatrix);
 
     return 0;
 }
 
-// function to multiply a 3 x 5 array by a scalar
-void scalarMultiply (int matrix[3][5], int scalar)
-{
-    int row, column;
-    for ( row = 0; row < 3; ++row )
-        for ( column = 0; column < 5; ++ column )
-            matrix[row][column] *= scalar;
+void displayMatrix (int matrix[3][5]) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 5; ++j)
+            printf ("%5i ", matrix[i][j]);
+        printf ("\n");
+    };
 }
 
-void displayMatrix (int matrix[3][5])
-{
-    int row, column;
-    for ( row = 0; row < 3; row++ ) {
-        for ( column = 0; column < 5; column++ )
-            printf ("%5i", matrix[row][column]);
-        printf ("\n");
-    }
+void scalarMultiply(int matrix[3][5], int scalar) {
+    for (int i = 0; i < 3; ++i) 
+        for (int j = 0; j < 5; ++j)
+            matrix[i][j] *= scalar;
 }

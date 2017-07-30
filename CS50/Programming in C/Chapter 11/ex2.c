@@ -1,23 +1,26 @@
-# include <stdio.h>
-# include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-char *to_bin( char *dest, int n )
+// print binary number
+void bin_print(int n)
 {
-    dest[32] = '\0';
-    for ( int i = 31; i >= 0; i-- ) {
-        dest[i] = n % 2 + '0';
-        n /= 2;
-    }
+    int sz = sizeof(n) * 8;
 
-    return dest;
+    for (int i = sz - 1 ; i >= 0; i--)
+        printf ("%c", abs(n >> i & 1) + '0');
+
+    printf("\n");
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    int n2 = -151;
-    //char buff[32];
+    int i = -123;
+    printf ("If 1's are passed to the left then arithmetic right shift "
+        "otherwise it is a logical right shift.\n\n");
+    bin_print(i);
+    bin_print(i>>1);
+    bin_print(i>>3);
+    bin_print((unsigned int) ~0 >> (32 - 5));
 
-    for ( int i = 1; i < 6; i++ )
-        printf ("n >> %i is %i\n", i, n2 >> i);
     return 0;
 }

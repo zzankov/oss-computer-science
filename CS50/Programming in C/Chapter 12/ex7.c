@@ -1,15 +1,14 @@
-# include <stdio.h>
-# define IS_UPPER_CASE(C)   (((C)>='A')&&((C)<='Z'))
-# define IS_LOWER_CASE(C)   (((C)>='a')&&((C)<='z'))
-# define IS_ALPHABETIC(C)   ((IS_UPPER_CASE(C))||(IS_LOWER_CASE(C)))
+#include <stdio.h>
 
-int main(void)
+#define ISLOWER(c) ((c) >= 'a' && (c) <= 'z')
+#define ISUPPER(c) ((c) >= 'A' && (c) <= 'Z')
+#define IS_ALPHABETIC(c) (ISLOWER((c)) || ISUPPER((c)))
+
+int main (int argc, char *argv[])
 {
-    char a, b;
-    a = ' ';
-    b = 'B';
+    printf ("IS_ALPHABETIC(%c) = %i\n", 'F', IS_ALPHABETIC('F'));
+    printf ("IS_ALPHABETIC(%c) = %i\n", 'f', IS_ALPHABETIC('f'));
+    printf ("IS_ALPHABETIC(%c) = %i\n", '1', IS_ALPHABETIC('1'));
 
-    printf ("Is character variable 'a' alphabetic? %i\n", IS_ALPHABETIC(a));
-    printf ("Is character variable 'b' alphabetic? %i\n", IS_ALPHABETIC(b));
     return 0;
 }
