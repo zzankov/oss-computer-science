@@ -1,37 +1,34 @@
-# include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
+#define BUFFSIZE 1000
 int main (int argc, char *argv[])
 {
-    char    toprint;
-    int     nlns = 1;
-    FILE    *in;
-    // check number of arguments
-    if ( argc != 2 )
+    char c = 0;
+    int i = 1;
+    char buffer[BUFFSIZE];
+    FILE *f;
+
+    // check for correct number of arguments
+    if (argc != 2) {
+        printf ("usage: ./ex6 fName");
+        exit(EXIT_FAILURE);
+    }
+
+    if (!(f = fopen(argv[1], "r"))) {
+        printf ("could not open file %s for reading\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+
+    while (tolower(c) != 'q' && fgets(buffer, BUFFSIZE, f))
     {
-        printf ("Incorrect number of arguments.\n");
-        return 1;
+        printf ("%i %s", i, buffer);
+
+        if (i % 20 == 0) 
+            c = getchar();
+        i++;
     }
 
-    // attempt to open file for reading
-    if ( !(in = fopen(argv[1], "r")) )
-    {
-        printf ("Failed to open file %s for reading.\n", argv[1]);
-        return 2;
-    }
-
-    // printf 20 lines at a time
-    while ( (toprint = getc(in)) != EOF ) {
-        printf ("%c", toprint);
-        if (toprint == '\n') {
-            nlns++;
-            if (nlns == 20) {
-                nlns = 1;
-                printf ("Enter 'q' to exit the program: ");
-                if (getc(stdin) == 'q')
-                    break;
-            }
-        }
-    }
-
-    return 0;
+    return EXIT_SUCCESS;
 }

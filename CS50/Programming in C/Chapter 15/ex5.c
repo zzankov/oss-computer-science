@@ -1,32 +1,50 @@
-# include <stdio.h>
-# include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BUFF_SIZE 1000
+
+void prtCols(char *line, int m, int n)
+{
+    for ( ; m <= n && m < strlen(line); m++)
+        printf("%c", line[m]);
+    if (line[m] != '\n');
+        printf("\n");
+}
 
 int main (int argc, char *argv[])
 {
-    // variable declarations
-    int     m, n;
-    char    str[1000];
-    FILE    *in;
+    int m, n;
+    char fName[64], buffer[BUFF_SIZE];
+    FILE *in;
 
-    // check if correct number of arguments
-    if ( argc != 2 ) {
-        printf ("Incorrect number of arguments.\n");
-        return 1;
+    // check arguments
+    if (argc != 3) {
+        printf ("usage: ./ex5 m n\n");
+        exit(EXIT_FAILURE);
     }
-    
-    // attemp to open file for reading
-    if ( !(in = fopen(argv[1], "r")) ) {
-        printf ("Could not open file %s for reading.\n",
-                argv[1]);
-        return 2;
+    if (!(m = atoi(argv[1]))) {
+        printf ("integer expected for 'm'\n");
+        exit(EXIT_FAILURE);
+    }
+    if (!(n = atoi(argv[2]))) {
+        printf ("integer expected for 'n'\n");
+        exit(EXIT_FAILURE);
     }
 
-    // get m and n
-    printf ("Please give me column numbers m and n: ");
-    scanf  ("%i%i", &m, &n);
+    printf("Give me a filename: ");
+    scanf ("%63s", fName);
 
-    while ( fgets(str, 1000, in) ) 
-        printf ("%.*s\n", n - m, str + m);
-    
-    return 0;
-} 
+    // attempt to open file for reading
+    if (!(in = fopen(fName, "r"))) {
+        printf ("Could not open file %s for reading\n", fName);
+        exit(EXIT_FAILURE);
+    }
+
+    do {
+        if (fgets(buffer, BUFF_SIZE, in))
+            prtCols(buffer, m, n);
+    } while (!feof(in));
+
+    return (EXIT_SUCCESS);
+}

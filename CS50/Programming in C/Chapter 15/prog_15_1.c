@@ -1,27 +1,25 @@
 // Program to illustrate various printf() formats
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main (int argc, char *argv[])
 {
-    // variable declarations
-    char        c = 'X';
-    char        s[] = "abcdefghijklmnopqrstuvwxyz";
-    int         i = 425;
-    short int   j = 17;
-    unsigned int u = 0xf179u;
-    long int    l = 7500l;
-    long long int L = 0x1234567812345678LL;
-    float       f = 12.978F;
-    double      d = -97.4583;
-    char        *cp = &c;
-    int         *ip = &i;
-    int         c1, c2;
+    char            c = 'x';
+    char            s[] = "abcdefghijklmnopqrstuvwxyz";
+    int             i = 425;
+    short int       j = 17;
+    unsigned int    u = 0xf179U;
+    long int        l = 75000L;
+    long long int   L = 0x123456789LL;
+    float           f = 12.978F;
+    double          d = -97.4583;
+    char            *cp = &c;
+    int             *ip = &i;
+    int             c1, c2;
 
-    // printf statements
     printf ("Integers:\n");
-    printf ("%i  %o  %x  %u\n", i, i, i, i);
+    printf ("%i  %o  %x  %u\n", i, i ,i ,i);
     printf ("%x  %X  %#x  %#X\n", i, i, i, i);
-    printf ("%+i  % i  %07i  %.7i\n", i, i, i, i);
+    printf ("%+i % i %07i %.7i\n", i, i, i, i);
     printf ("%i  %o  %x  %u\n", j, j, j, j);
     printf ("%i  %o  %x  %u\n", u, u, u, u);
     printf ("%ld  %lo  %lx  %lu\n", l, l, l, l);
@@ -40,14 +38,15 @@ int main(void)
     printf ("%c\n", c);
     printf ("%3c%3c\n", c, c);
     printf ("%x\n", c);
+
     printf ("\nStrings:\n");
     printf ("%s\n", s);
     printf ("%.5s\n", s);
     printf ("%30s\n", s);
     printf ("%20.5s\n", s);
     printf ("%-20.5s\n", s);
-
-    printf ("\nPoiters\n");
+    
+    printf ("\nPointers:\n");
     printf ("%p  %p\n\n", ip, cp);
 
     printf ("This%n is fun.%n\n", &c1, &c2);

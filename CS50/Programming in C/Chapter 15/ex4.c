@@ -1,43 +1,39 @@
-# include <stdio.h>
-# define SIZE   70
-int main( int argc, char *argv[])
+#include <stdio.h>
+#include <stdlib.h>
+
+#define BUFFER_SIZE 1000
+
+int main (int argc, char *argv[])
 {
-    FILE *in1, *in2;
-    char buff1[SIZE], buff2[SIZE];
-
-    // check for correct number of arguments
-    if ( argc != 3 )
-    {
-        printf ("Incorrect number of arguments!\n");
-        return 1;
+    if (argc != 3) {
+        printf ("usage: ./ex4 file1 file2\n");
+        exit(EXIT_FAILURE);
     }
 
-    // try to open file 1
-    if ( !(in1 = fopen(argv[1], "r")) )
-    {
-        printf ("Could not open file %s for reading.\n", argv[1]);
-        return 2;
+    FILE *f1, *f2;
+    char buffer[BUFFER_SIZE];
+
+    if ( !(f1 = fopen(argv[1], "r")) ) {
+        printf ("Cannot open file %s for reading.\n", argv[1]);
+        exit(EXIT_FAILURE);
     }
 
-    // try to open file 2
-    if ( !(in2 = fopen(argv[2], "r")) )
-    {
-        printf ("Could not open file %s for reading.\n", argv[2]);
-        return 2;
+    if ( !(f2 = fopen(argv[2], "r")) ) {
+        printf ("Cannot open file %s for reading.\n", argv[2]);
+        exit(EXIT_FAILURE);
     }
 
-    // go through file printing in an alternating way
-    while (!feof(in1) || !feof(in2))
-    {
-        if (fgets(buff1, SIZE, in1))
-            fputs(buff1, stdout);
+    //fgets()
+    do {
+        // read file 1 line
+        if (fgets(buffer, BUFFER_SIZE, f1))
+            fprintf(stdout, "%s", buffer);
 
-        if (fgets(buff2, SIZE, in2)) 
-            fputs(buff2, stdout);
-    }
+        // read file 2 line
+        if (fgets(buffer, BUFFER_SIZE, f2))
+            fprintf(stdout, "%s", buffer);
 
-    fclose(in1);
-    fclose(in2);
+    } while (!(feof(f1) && feof(f2)));
 
-    return 0;
+    return (EXIT_SUCCESS);
 }

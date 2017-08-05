@@ -1,39 +1,34 @@
-# include <stdio.h>
-# include <ctype.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
 
-int main( int argc, char *argv[] )
+int main (int argc, char *argv[])
 {
+
+    if (argc != 3) {
+        printf ("usage: ./ex3 inFileName outFileName\n");
+        exit(EXIT_FAILURE);
+    }
+    
     FILE *in, *out;
-    int c;
+    char c;
 
-    // check if correct number of argumesnts is passed
-    if ( argc != 3 )
-    {
-        printf ("Incorrect number of arguments passed.\n");
-        return 1;
+    if (!(in = fopen(argv[1], "r"))) {
+        printf ("File %s could not be open for reading.\n", argv[1]);
+        exit(EXIT_FAILURE);
     }
 
-    // try to open file for reading
-    if ( !(in = fopen(argv[1], "r")) )
-    {
-        printf ("Cannot open file %s for reading.\n", argv[1]);
-        return 2;
+    if (!(out = fopen(argv[2], "w"))) {
+        printf ("File %s could not be open for writing.\n", argv[2]);
+        exit(EXIT_FAILURE);
     }
 
-    // try to open file for writing
-    if ( !(out = fopen(argv[2], "w")) )
-    {
-        printf ("Cannot open file %s for writing.\n", argv[2]);
-        return 3;
+    while ((c = getc(in)) != EOF){
+        c = toupper(c);
+        putc(c, out);
     }
 
-    // copy input file onto the output file
-    while ( (c = getc(in)) != EOF )
-        putc(tolower(c), out);
+    printf("File copied and capitalized successfully.\n");
 
-    // close files
-    fclose(in);
-    fclose(out);
-
-    return 0;
+    return EXIT_SUCCESS;
 }
